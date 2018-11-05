@@ -79,11 +79,11 @@ class Trainer(object):
         # get word embeddings
         src_emb = self.src_emb(Variable(src_ids, volatile=True))
         tgt_emb = self.tgt_emb(Variable(tgt_ids, volatile=True))
-        logger.info("before mapping")
-        logger.info(src_emb)
+        # logger.info("before mapping")
+        # logger.info(src_emb)
         src_emb = self.mapping(Variable(src_emb.data, volatile=volatile))
-        logger.info("after mapping")
-        logger.info(src_emb)
+        # logger.info("after mapping")
+        # logger.info(src_emb)
         tgt_emb = Variable(tgt_emb.data, volatile=volatile)
 
         # input / target
@@ -214,8 +214,8 @@ class Trainer(object):
         #     for [a,b] in self.dico.numpy():
         #         print(id2word1[a], id2word2[b])
 
-        logger.info("dico_size: after")
-        logger.info(self.dico.shape)
+        # logger.info("dico_size: after")
+        # logger.info(self.dico.shape)
 
     def build_w_dictionary(self):
         src_emb = self.mapping(self.src_emb.weight).data

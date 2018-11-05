@@ -16,7 +16,7 @@ import gzip
 import kenlm
 from src.utils import bool_flag, initialize_exp
 from src.models import build_model
-from src.g_trainer1 import Trainer
+from src.g_trainer import Trainer
 from src.evaluation import Evaluator
 from torch.autograd import Variable
 from src.g_utils import load_translation_data
