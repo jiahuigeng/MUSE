@@ -1,0 +1,8 @@
+normal unsupervised training
+qsubmit -n -m 30  -t 1:00:00 -gpu 1 "python unsupervised.py --src_emb ../corpus/news.2014-2017.de.100M.ep.10.vec  --tgt_emb ../corpus/news.2014-2017.en.100M.ep.10.vec  --exp_path lm-jgeng --exp_name unsup --exp_id lm-dis.center --n_refinement 1 --normalize_embeddings center  --max_vocab 50000"
+
+corpus-based training with exported embeddings
+qsubmit -n  -m 30 -t 2:00:00 -gpu 1 "python g-unsupervised-emb.py --src_emb ../corpus/news.2014-2017.de.100M.ep.10.vec  --tgt_emb ../corpus/news.2014-2017.en.100M.ep.10.vec --mapped_src_emb lm-jgeng/unsup/lm-dis.center/vectors-de.txt --mapped_tgt_emb lm-jgeng/unsup/lm-dis.center/vectors-en.txt --exp_path lm-jgeng --exp_name unsup --exp_id lm-dis.center --n_lm_dis 1 --lm_train True  --src_file ../corpus/de-parallel/100k-de --n_nep 8   --init_lr 0.0001 --eval True --sent_batch 1000 --total_sent 50000 --wt_scaling -1 --normalize_embeddings center --lm \$(cf ../corpus/pap.lm.en.5gram.trie)"
+
+corpus-based training without exported embeddings
+qsubmit -n  -m 30 -t 1:00:00 -gpu 1 "python g-unsupervised-base.py --src_emb ../corpus/news.2014-2017.de.100M.ep.10.vec  --tgt_emb ../corpus/news.2014-2017.en.100M.ep.10.vec  --exp_path lm-jgeng --exp_name unsup --exp_id lm-dis.center --n_lm_dis 1 --lm_train True  --src_file ../corpus/de-parallel/100k-de --n_nep 8   --init_lr 0.0001 --eval True --sent_batch 1000 --total_sent 50000 --wt_scaling -1 --normalize_embeddings center --lm \$(cf ../corpus/pap.lm.en.5gram.trie) --max_vocab 50000 --lr_decay 0.98 --epoch_size_lm 100000"
